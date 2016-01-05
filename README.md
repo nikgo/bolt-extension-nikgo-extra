@@ -13,11 +13,15 @@ To use this extension add these lines in your `extensions/composer.json`:
     ...
     "repositories": {
         "packagist": false,
-        ...
         "nikgo-extra": {
             "type": "vcs",
             "url": "https://github.com/nikgo/bolt-extension-nikgo-extra"
         }
+        ...
+    },
+    ...
+    require": {
+        "nikgo/extra": "dev-master"
     },
     ...
 }
