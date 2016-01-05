@@ -32,7 +32,7 @@ This release contains changes to:
 
 #### Override `Bolt\Storage` class
 
-*** Patch for Bolt 2.2 - Storage component has refactored in 3.0 ***
+*Patch for Bolt 2.2 - Storage component has refactored in 3.0*
 
 Changes especially to content search functions:
 
@@ -49,7 +49,7 @@ Changes especially to content search functions:
 
 #### Patch translation path 
 
-** Workaround for Bolt 2.2 - fix in 3.0 available, see Bolt issue #3553 and #3800 **
+*Workaround for Bolt 2.2 - fix in 3.0 available, see Bolt issue #3553 and #3800*
 
 * Load translation files from `app/resources/translations/` for composer installations
   Example: `de_DE/contenttypes.de_DE.yml`
@@ -72,7 +72,7 @@ Changes especially to content search functions:
 
 To use CKEditor enchancements in your Bolt installation set `customConfig` in your contenttype html fields or global ck config.
 
-** Example: **
+**Example:**
 
 * config.yml
 
