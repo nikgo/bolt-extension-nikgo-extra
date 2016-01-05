@@ -1,0 +1,27 @@
+{
+    "name": "nikgo/extra",
+    "description": "nikgo's Bolt Extras",
+    "type": "bolt-extension",
+    "keywords": ["core", "patch"],
+    "require": {
+        "bolt/bolt": ">=2.0.0,<3.0.0"
+    },
+    "authors": [
+        {
+            "name": "Niklas Goebel",
+            "email": "github@niklas-goebel.de",
+            "homepage": "https://niklas-goebel.de"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "init.php"
+        ],
+        "psr-4": {
+            "Bolt\\Extension\\NikGo\\Extra\\": ["", "src/"]
+        }
+    },
+    "extra": {
+        "bolt-assets": "assets"
+    }
+}
