@@ -48,31 +48,6 @@ class Storage extends Bolt\Storage {
     }
 
     /**
-     * Decode search query into searchable parts.
-     */
-    private function decodeSearchQuery($q) {
-        $words = preg_split('|[\r\n\t ]+|', trim($q));
-
-        $words = array_map(
-                function ($word) {
-            return mb_strtolower($word);
-        }, $words
-        );
-        $words = array_filter(
-                $words, function ($word) {
-            return strlen($word) >= 2;
-        }
-        );
-
-        return array(
-            'valid' => count($words) > 0,
-            'in_q' => $q,
-            'use_q' => implode(' ', $words),
-            'words' => $words
-        );
-    }
-
-    /**
      * Search through a single contenttype.
      *
      * Search, weigh and return the results.
@@ -255,5 +230,127 @@ class Storage extends Bolt\Storage {
             'results' => $pageResults
         );
     }
+    
+    // Private Methods
+    
+    /**
+     * Compare by search weights.
+     *
+     * Or fallback to dates or title
+     *
+     * @param \Bolt\Content $a
+     * @param \Bolt\Content $b
+     *
+     * @return int
+     */
+    private function compareSearchWeights(\Bolt\Content $a, \Bolt\Content $b)
+    {
+        if ($a->getSearchResultWeight() > $b->getSearchResultWeight()) {
+            return -1;
+        }
+        if ($a->getSearchResultWeight() < $b->getSearchResultWeight()) {
+            return 1;
+        }
+        if ($a['datepublish'] > $b['datepublish']) {
+            // later is more important
+            return -1;
+        }
+        if ($a['datepublish'] < $b['datepublish']) {
+            // earlier is less important
+            return 1;
+        }
 
+        return strcasecmp($a['title'], $b['title']);
+    }
+
+    /**
+     * Helper function to set the proper 'where' parameter,
+     * when getting values like '<2012' or '!bob'.
+     *
+     * @param string $key
+     * @param string $value
+     * @param mixed  $fieldtype
+     *
+     * @return string
+     */
+    private function parseWhereParameter($key, $value, $fieldtype = false)
+    {
+        $value = trim($value);
+
+        // check if we need to split.
+        if (strpos($value, " || ") !== false) {
+            $values = explode(" || ", $value);
+            foreach ($values as $index => $value) {
+                $values[$index] = $this->parseWhereParameter($key, $value, $fieldtype);
+            }
+
+            return "( " . implode(" OR ", $values) . " )";
+        } elseif (strpos($value, " && ") !== false) {
+            $values = explode(" && ", $value);
+            foreach ($values as $index => $value) {
+                $values[$index] = $this->parseWhereParameter($key, $value, $fieldtype);
+            }
+
+            return "( " . implode(" AND ", $values) . " )";
+        }
+
+        // Set the correct operator for the where clause
+        $operator = "=";
+
+        $first = substr($value, 0, 1);
+
+        if ($first == "!") {
+            $operator = "!=";
+            $value = substr($value, 1);
+        } elseif (substr($value, 0, 2) == "<=") {
+            $operator = "<=";
+            $value = substr($value, 2);
+        } elseif (substr($value, 0, 2) == ">=") {
+            $operator = ">=";
+            $value = substr($value, 2);
+        } elseif ($first == "<") {
+            $operator = "<";
+            $value = substr($value, 1);
+        } elseif ($first == ">") {
+            $operator = ">";
+            $value = substr($value, 1);
+        } elseif ($first == "%" || substr($value, -1) == "%") {
+            $operator = "LIKE";
+        }
+
+        // Use strtotime to allow selections like "< last monday" or "this year"
+        if (in_array($fieldtype, array('date', 'datetime')) && ($timestamp = strtotime($value)) !== false) {
+            $value = date('Y-m-d H:i:s', $timestamp);
+        }
+
+        $parameter = sprintf("%s %s %s", $this->app['db']->quoteIdentifier($key), $operator, $this->app['db']->quote($value));
+
+        return $parameter;
+    }
+    
+     /**
+     * Decode search query into searchable parts.
+     */
+    private function decodeSearchQuery($q) {
+        $words = preg_split('|[\r\n\t ]+|', trim($q));
+
+        $words = array_map(
+                function ($word) {
+            return mb_strtolower($word);
+        }, $words
+        );
+        $words = array_filter(
+                $words, function ($word) {
+            return strlen($word) >= 2;
+        }
+        );
+
+        return array(
+            'valid' => count($words) > 0,
+            'in_q' => $q,
+            'use_q' => implode(' ', $words),
+            'words' => $words
+        );
+    }
+    
 }
