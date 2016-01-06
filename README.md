@@ -8,7 +8,7 @@ This extension adds a couple of modifications to bolt that I have found useful.
 
 To use this extension add these lines in your `extensions/composer.json`:
 
-````json
+````text
 {
     ...
     "repositories": {
@@ -20,7 +20,7 @@ To use this extension add these lines in your `extensions/composer.json`:
         ...
     },
     ...
-    require": {
+    "require": {
         "nikgo/extra": "dev-master"
     },
     ...
