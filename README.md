@@ -8,7 +8,7 @@ This extension adds a couple of modifications to bolt that I have found useful.
 
 To use this extension add these lines in your `extensions/composer.json`:
 
-````
+````json
 {
     ...
     "repositories": {
@@ -55,24 +55,25 @@ Changes especially to content search functions:
 
 *Workaround for Bolt 2.2 - fix in 3.0 available, see Bolt issue #3553 and #3800*
 
-* Load translation files from `app/resources/translations/` for composer installations
+* Load translation files from `app/resources/translations/` for composer installations.
+
   Example: `de_DE/contenttypes.de_DE.yml`
 
 #### Bolt Backend
 
 * Override `_base/listing.twig` 
-** Show only sortorder if is not empty
-** Show usernames (set trimtext limit from 15 up to 25 chars) 
+ * Show only sortorder if is not empty
+ * Show usernames (set trimtext limit from 15 up to 25 chars) 
 
 ## CKEditor 
 
 * Extend `Bolt.stack.selectFromPullDown` for CKEditor dialog handling 
 * Load extra plugins
-** boltbrowser: Override image browser with Bolt native select dialog
-** image2
-** magicline
-** quicktable
-** blockimagepaste: Allow only images with relative paths and remove base64 images
+  * boltbrowser (Override image browser with Bolt native select dialog)
+  * image2
+  * magicline
+  * quicktable
+  * blockimagepaste (Allow only images with relative paths and remove base64 images)
 
 To use CKEditor enchancements in your Bolt installation set `customConfig` in your contenttype html fields or global ck config.
 
@@ -80,7 +81,7 @@ To use CKEditor enchancements in your Bolt installation set `customConfig` in yo
 
 * config.yml
 
-````
+````yaml
 wysiwyg:
     ...
     ck:
@@ -92,7 +93,7 @@ wysiwyg:
 
 Create this file in your `web` folder:
 
-````
+````javascript
 CKEDITOR.editorConfig = function (config)
 {
     // Plugins
