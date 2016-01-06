@@ -7,7 +7,7 @@ use Bolt\Library as Lib;
 class Extension extends \Bolt\BaseExtension {
 
     public function getName() {
-        return "Bolt Patch";
+        return "Bolt Extras";
     }
 
     public function initialize() {

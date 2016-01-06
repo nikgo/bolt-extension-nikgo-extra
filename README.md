@@ -6,6 +6,8 @@ It will be version locked to very specififc range of bolt versions.**
 
 This extension adds a couple of modifications to bolt that I have found useful.
 
+## Install
+
 To use this extension add these lines in your `extensions/composer.json`:
 
 ````text
@@ -28,11 +30,11 @@ To use this extension add these lines in your `extensions/composer.json`:
 ````
 Now you can install this extension in Bolt backend.
 
-# Changes
+## Changes
 
 This release contains changes to:
 
-## Bolt Core
+### Bolt Core
 
 #### Override `Bolt\Storage` class
 
@@ -65,7 +67,7 @@ Changes especially to content search functions:
  * Show only sortorder if is not empty
  * Show usernames (set trimtext limit from 15 up to 25 chars) 
 
-## CKEditor 
+### CKEditor 
 
 * Extend `Bolt.stack.selectFromPullDown` for CKEditor dialog handling 
 * Load extra plugins
@@ -114,6 +116,6 @@ CKEDITOR.editorConfig = function (config)
 
 **Tipp:** For more ckeditor config paramaters see http://docs.ckeditor.com. You can change toolbar and more.  
 
-## Twig
+### Twig
 
 * Clean excerpt: Add twig function and filter for `cleanexcerpt` to remove annoying spaces and undersorce in a excerpt. 
