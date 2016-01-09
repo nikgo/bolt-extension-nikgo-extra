@@ -128,7 +128,7 @@ class HtmlTools extends \Twig_Extension {
 
             if ($element->hasAttribute('class')) {
                 $attrClass = $element->getAttribute('class');
-                $optionsImg['class'] = $attrClass;
+                $optionsImg['class'][] = $attrClass;
             }
 
             $htmlImg = (string) $respImg($filename, $name, $optionsImg);
