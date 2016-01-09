@@ -119,3 +119,6 @@ CKEDITOR.editorConfig = function (config)
 ### Twig
 
 * Clean excerpt: Add twig function and filter for `cleanexcerpt` to remove annoying spaces and undersorce in a excerpt. 
+* Html tools functions and filters:
+  * htmlThumbs: Replace file images from html img tags to thumbnails (warning: file path should be bolt files folder).
+  * htmlRespImg: Replace html img tags with repsonsive images (srcset and sizes). Calls `respImg` from bolt extension `boltresponsiveimages` (warning: file path should be bolt files folder).   

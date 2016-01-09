@@ -15,6 +15,7 @@ class Extension extends \Bolt\BaseExtension {
         $this->app->before(array($this, 'patchTranslationPath'));
         $this->app->before(array($this, 'patchSearchStorage'));
         $this->app->before(array($this, 'addAssets'));
+        $this->app['twig']->addExtension(new Twig\HtmlTools($this->app));
         $this->addTwigCleanExcerpt();
     }
 
