@@ -126,6 +126,11 @@ class HtmlTools extends \Twig_Extension {
                 $optionsImg['sizes'][] = $width . 'px';
             }
 
+            if ($element->hasAttribute('class')) {
+                $attrClass = $element->getAttribute('class');
+                $optionsImg['class'] = $attrClass;
+            }
+
             $htmlImg = (string) $respImg($filename, $name, $optionsImg);
             $domImg = $this->createDOMDocument($htmlImg);
 
