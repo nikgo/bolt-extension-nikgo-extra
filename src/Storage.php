@@ -336,7 +336,7 @@ class Storage extends Bolt\Storage {
 
         $words = array_map(
                 function ($word) {
-            return mb_strtolower($word);
+            return mb_strtolower($word, mb_detect_encoding($word));
         }, $words
         );
         $words = array_filter(
