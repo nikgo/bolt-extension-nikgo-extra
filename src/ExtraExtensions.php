@@ -1,22 +1,23 @@
 <?php
 
-namespace Bolt\Extension\NikGo\Extra;
+namespace Bolt\Extension\Nikgo\Extra;
 
+use Bolt\Extension\SimpleExtension;
 use Bolt\Library as Lib;
 
-class Extension extends \Bolt\BaseExtension {
+class ExtraExtension extends SimpleExtension {
 
-    public function getName() {
+    public function getDisplayName() {
         return "Bolt Extras";
     }
 
     public function initialize() {
-        $this->app->before(array($this, 'initTemplating'));
-        $this->app->before(array($this, 'patchTranslationPath'));
-        $this->app->before(array($this, 'patchSearchStorage'));
-        $this->app->before(array($this, 'addAssets'));
-        $this->app['twig']->addExtension(new Twig\HtmlTools($this->app));
-        $this->addTwigCleanExcerpt();
+//        $this->app->before(array($this, 'initTemplating'));
+//        $this->app->before(array($this, 'patchTranslationPath'));
+//        $this->app->before(array($this, 'patchSearchStorage'));
+//        $this->app->before(array($this, 'addAssets'));
+//        $this->app['twig']->addExtension(new Twig\HtmlTools($this->app));
+//        $this->addTwigCleanExcerpt();
     }
 
     public function initTemplating() {

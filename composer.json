@@ -4,7 +4,7 @@
     "type": "bolt-extension",
     "keywords": ["core", "patch"],
     "require": {
-        "bolt/bolt": ">=2.2.16,<3.0.0"
+        "bolt/bolt": "^3.0"
     },
     "authors": [
         {
@@ -13,15 +13,21 @@
             "homepage": "https://niklas-goebel.de"
         }
     ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
-        "files": [
-            "init.php"
-        ],
         "psr-4": {
-            "Bolt\\Extension\\NikGo\\Extra\\": ["", "src/"]
+            "Bolt\\Extension\\Nikgo\\Extra\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Bolt\\Extension\\Nikgo\\Extra\\Tests\\": "tests",
+            "Bolt\\Tests\\": "vendor/bolt/bolt/tests/phpunit/unit/"
         }
     },
     "extra": {
-        "bolt-assets": "assets"
+        "bolt-assets": "web",
+        "bolt-class": "Bolt\\Extension\\Nikgo\\Extra\\ExtraExtension"
     }
 }
